@@ -3,8 +3,8 @@ import allure
 import pytest
 from selenium import webdriver
 from py.xml import html
-import time
-from lib.qq_email import email
+# import time
+# from lib.qq_email import email
 
 
 # _driver = None
