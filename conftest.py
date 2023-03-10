@@ -47,7 +47,7 @@ def pytest_runtest_makereport(item):
     if report.when == "call":
         getCaseNum2RowInExcel()
         import win32com.client
-        excel = win32com.client.Dispatch("Excel.Application")
+        excel = win32com.client.Dispatch("Wps.Application")
         excel.Visible = True
         workbook = excel.Workbooks.Open(r'C:\Users\Administrator\Desktop\login.xlsx')
         sheet = workbook.Sheets(1)
