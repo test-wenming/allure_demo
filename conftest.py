@@ -46,11 +46,19 @@ def pytest_runtest_makereport(item):
 
     if report.when == "call":
         getCaseNum2RowInExcel()
-        import win32com.client
-        excel = win32com.client.Dispatch("Excel.Application")
-        excel.Visible = True
-        workbook = excel.Workbooks.Open(r'C:\Users\Administrator\Desktop\login.xlsx')
-        sheet = workbook.Sheets(1)
+        # import win32com.client
+        # excel = win32com.client.Dispatch("Excel.Application")
+        # excel.Visible = True
+        # workbook = excel.Workbooks.Open(r'C:\Users\Administrator\Desktop\login.xlsx')
+        # sheet = workbook.Sheets(1)
+
+        import openpyxl
+
+        workbook = openpyxl.load_workbook(r'C:\Users\Administrator\Desktop\login.xlsx')
+
+        sheet = workbook.worksheets[0]
+
+
 
         # 初衷是想通过 key, value 的方式 set get 获取用例编号
         # code_value = item.config.cache.get(str(code), None)
@@ -59,7 +67,8 @@ def pytest_runtest_makereport(item):
         # 找到对应的测试用例在excel中的行数
         print(f'这个是report.nodeid：{report.nodeid}')
         code = report.nodeid.split("[")[-1][:-1]
-        cell = sheet.Cells(caseNum2Row[code], TEST_RET_COL_NO)
+        # cell = sheet.Cells(caseNum2Row[code], TEST_RET_COL_NO)
+        cell = sheet.cell(caseNum2Row[code], TEST_RET_COL_NO)
         # 翻动滚动条，保证当前测试结果单元格可见
         # excel.ActiveWindow.ScrollRow = caseNum2Row[caseNo] - 2
 
@@ -74,7 +83,8 @@ def pytest_runtest_makereport(item):
             else:
                 cell.Value = 'error'
         # 保存内容
-        workbook.Save()
+        # workbook.Save()
+        workbook.save('login.xlsx')
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
