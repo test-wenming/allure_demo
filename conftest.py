@@ -12,8 +12,9 @@ from py.xml import html
 caseNum2Row = {}     # 用例编号->行数 表
 TEST_RET_COL_NO = 4  # 测试结果在用例excel文件中的列数
 
-
+# val在这里指代@pytest.mark.parametrize每次执行用例所传的参数
 # 修改@pytest.mark.parametrize的参数名（code）为Excel中的用例编号，再通过report.nodeid获取该用例编号。
+
 def pytest_make_parametrize_id(val):
     newid = str(val[0])
     return newid
