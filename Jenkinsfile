@@ -6,6 +6,7 @@ pipeline{
                 bat 'pytest --alluredir allure-results --clean-alluredir'
              }
         }
+    }
     post {
         always {
             // 无论构建成功或失败都执行的操作
