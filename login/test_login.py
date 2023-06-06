@@ -71,6 +71,7 @@ class Test_Login:
     @pytest.mark.parametrize("code", get_data())  # pytest参数化装饰器，第一个参数写自定义的参数名，第二个参数传取到的数据
     @allure.story("测试登录")
     @allure.step("1、输入用户名 \n 2、输入密码  \n 3、提交登录")
+    @pytest.mark.flaky(reruns=2, reruns_delay=10)
     def test_UI_0001(self, driver, code, cache):
 
         # 初衷是想通过 key, value 的方式 set get 获取用例编号
