@@ -91,6 +91,8 @@ class Test_Login:
         _driver.find_element_by_css_selector("#captcha").clear()
         # 获取图片验证码
         driver.find_element_by_css_selector('.item #codeimage').screenshot('code.png')
+        # 插入原始图片验证码
+        allure.attach.file("code.png", attachment_type=allure.attachment_type.PNG)
         # 以下为识别验证码的代码
         ocr = ddddocr.DdddOcr()
         with open("code.png", "rb") as fp:
